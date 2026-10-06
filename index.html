@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kerala AI</title>
+<style>
+:root{--green:#0d4b35;--green2:#176b4d;--cream:#fff8e8;--gold:#c9a34a;--brown:#65452d;--ink:#17352a;--card:rgba(255,250,238,.94)}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans Malayalam",sans-serif;color:var(--ink);background:linear-gradient(135deg,#083b2a,#176b4d 45%,#d8c17b);min-height:100vh}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:radial-gradient(circle at 15% 20%,#fff 0 2px,transparent 3px),radial-gradient(circle at 80% 70%,#fff 0 1px,transparent 2px);background-size:38px 38px}
+.app{min-height:100vh;display:flex;max-width:1250px;margin:auto;background:rgba(255,248,232,.08);backdrop-filter:blur(8px)}
+.side{width:260px;background:#082f23;color:white;padding:18px;display:flex;flex-direction:column;border-right:2px solid #b9933c}
+.brand{font-size:24px;font-weight:800;letter-spacing:.4px;margin-bottom:18px}.brand span{color:#e3c56d}.new{width:100%;border:1px solid #78a78f;background:#104d38;color:white;border-radius:14px;padding:12px;font-size:15px}.history{margin-top:18px;font-size:13px;color:#bdd4c8}.item{padding:11px 8px;border-bottom:1px solid #ffffff18}
+.main{flex:1;display:flex;flex-direction:column;min-width:0;background:linear-gradient(180deg,rgba(255,248,232,.97),rgba(247,239,214,.96))}
+.top{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid #dccb9c;background:rgba(255,250,239,.9)}.title{font-weight:800}.badge{font-size:12px;padding:6px 9px;border-radius:20px;background:#e8dfc2;color:#315b49}.menu{display:none}
+.chat{flex:1;overflow:auto;padding:28px max(18px,5vw);background-image:linear-gradient(120deg,transparent 0 48%,rgba(201,163,74,.05) 48% 52%,transparent 52%);}
+.welcome{text-align:center;max-width:700px;margin:8vh auto 30px}.lamp{font-size:44px}.welcome h1{margin:8px 0;color:var(--green);font-size:clamp(30px,6vw,50px)}.welcome p{margin:0;color:#60756a}.suggestions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}.suggestions button{background:white;border:1px solid #d7c690;color:#285641;border-radius:20px;padding:9px 13px}
+.msg{display:flex;gap:12px;margin:20px auto;max-width:850px}.avatar{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;flex:none;background:var(--green);color:white}.user .avatar{background:var(--gold);color:#fff}.bubble{padding:13px 16px;border-radius:17px;line-height:1.55;box-shadow:0 2px 10px #6b54251a;background:var(--card);border:1px solid #eadbb2}.user .bubble{background:#e6f0e9;border-color:#c1d7ca}
+.composer{padding:14px max(14px,5vw) 18px;border-top:1px solid #d9c99b;background:rgba(255,250,239,.96)}.box{max-width:850px;margin:auto;display:flex;align-items:end;gap:8px;background:white;border:1px solid #cdbb87;border-radius:18px;padding:8px;box-shadow:0 8px 30px #31563b18}.box textarea{flex:1;border:0;outline:0;resize:none;min-height:42px;max-height:140px;font:inherit;padding:10px;background:transparent}.icon{border:0;background:#f0ead8;border-radius:12px;width:42px;height:42px}.send{background:var(--green);color:white}.note{text-align:center;font-size:11px;color:#788579;margin-top:7px}
+@media(max-width:700px){.side{display:none}.menu{display:block;border:0;background:none;font-size:22px}.top{height:58px}.chat{padding:18px 12px}.welcome{margin-top:7vh}.msg{margin:16px 0}.composer{padding:10px 10px 14px}.suggestions button{font-size:12px}}
+.credit{position:fixed;z-index:20;font-weight:800;letter-spacing:.5px;color:#fff8e8;text-shadow:0 1px 4px #17352a;background:rgba(13,75,53,.72);padding:7px 14px;border:1px solid rgba(201,163,74,.75);border-radius:999px;backdrop-filter:blur(6px);font-size:13px}.top-credit{top:10px;left:50%;transform:translateX(-50%)}.bottom-credit{bottom:10px;left:50%;transform:translateX(-50%)}</head>
+<body><div class="credit top-credit">By Amal Kumar</div><div class="app">
+<aside class="side"><div class="brand">🪔 Kerala <span>AI</span></div><button class="new" onclick="newChat()">＋ New chat</button><div class="history">RECENT CHATS</div><div id="history"><div class="item">Kerala travel ideas</div><div class="item">Learn Python</div></div></aside>
+<main class="main"><header class="top"><button class="menu" onclick="alert('On mobile, open the menu from the top-left.')">☰</button><div class="title">Kerala AI</div><div class="badge">AI Assistant</div></header>
+<section class="chat" id="chat"><div class="welcome" id="welcome"><div class="lamp">🪔</div><h1>Namaskaram!</h1><p>Your Kerala-inspired AI assistant. Ask in English or Malayalam.</p><div class="suggestions"><button onclick="ask('Give me a Kerala travel plan')">🌴 Kerala travel</button><button onclick="ask('Teach me Python simply')">🐍 Learn Python</button><button onclick="ask('നമസ്കാരം!')">🌿 Malayalam</button></div></div></section>
+<div class="composer"><form class="box" onsubmit="send(event)"><button type="button" class="icon" onclick="document.getElementById('file').click()">＋</button><input id="file" type="file" hidden><textarea id="input" placeholder="Message Kerala AI..." rows="1" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea><button class="icon send" type="submit">➤</button></form><div class="note">Powered by a secure server-side AI connection • By Amal Kumar</div></div></main></div>
+<script>
+const chat=document.getElementById('chat'), input=document.getElementById('input');
+function add(role,text){const row=document.createElement('div');row.className='msg '+role;row.innerHTML=`<div class="avatar">${role==='user'?'👤':'🪔'}</div><div class="bubble"></div>`;row.querySelector('.bubble').textContent=text;chat.appendChild(row);chat.scrollTop=chat.scrollHeight}
+function ask(t){input.value=t;send(new Event('submit',{cancelable:true}));}
+async function send(e){e.preventDefault();const t=input.value.trim();if(!t)return;document.getElementById('welcome')?.remove();add('user',t);input.value='';
+const history=[...document.querySelectorAll('.msg')].map(x=>({role:x.classList.contains('user')?'user':'assistant',content:x.querySelector('.bubble')?.textContent||''}));
+try{const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:t,history:history.slice(0,-1)})});const data=await r.json();if(!r.ok)throw new Error(data.error||'Request failed');add('assistant',data.reply)}catch(err){add('assistant','Sorry, the AI connection failed: '+err.message)}}
+function newChat(){location.reload()}
+</script><div class="credit bottom-credit">By Amal Kumar</div></body></html>
